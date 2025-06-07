@@ -3,7 +3,7 @@ payload: {
     "login": "MyNickName",
     "password": "MyPassword"
 }
--> {"allowed": bool}
+-> {"result": bool}
 
 
 /* TODO */
