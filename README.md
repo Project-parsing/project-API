@@ -1,4 +1,4 @@
-POST /login
+<pre>POST /login
 payload: {
     "login": "MyNickName",
     "password": "MyPassword"
@@ -60,4 +60,4 @@ payload: {
         ]
     }
 }
--> {"result": bool}
+-> {"result": bool}</pre>
