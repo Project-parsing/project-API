@@ -6,8 +6,7 @@ payload: {
 -> {"result": bool}
 
 
-/* TODO */
-POST /user/new 
+POST /users/new 
 payload: {
     "admin_name": "admin",
     "admin_password": "dsfdskjdfjdsfjdsf",
