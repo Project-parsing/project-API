@@ -36,6 +36,7 @@ payload: {
     "admin_name": "kdsofijdsofijdsfoij",
     "admin_password": "dsfdskjdfjdsfjdsf",
     "data": {
+        "author": "Ivan Petrov",
         "source": "DailyMail",
         "date": 1749323479,
         "header": "John Doe Runs Every Day",
@@ -50,7 +51,7 @@ payload: {
     "admin_password": "dsfdskjdfjdsfjdsf",
     "data": {
         "source": "DailyMail",
-        "author": "", // optional field
+        "author": "Ivan Petrov",
         "date": 1749323479,
         "header": "John Doe Runs Every Day",
         "text": "mhm first of alll blah blah",
