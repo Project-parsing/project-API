@@ -67,7 +67,7 @@ def add_tg():
         print("")
 
     if db_manager.login(admin_name, admin_password):
-        result = db_manager.insert_tg_post()
+        result = db_manager.insert_tg_post(source=source, author=author, date=date, header=header, text=text)
     else:
         result = False
         print("")
@@ -84,16 +84,18 @@ def add_web():
         admin_name = payload.get("admin_name")
         admin_password = payload.get("admin_password")
         data = payload.get("data")
-        login = data.get("login")
-        name = data.get("name")
-        password = data.get("password")
-        surname = data.get("surname")
+        source = payload.get("source")
+        author = payload.get("author")
+        date = payload.get("date")
+        header = payload.get("header")
+        text = payload.get("text")
+        links = payload.get("links")
     except:
         return
         print("")
 
     if db_manager.login(admin_name, admin_password):
-        result = db_manager.insert_web_post()
+        result = db_manager.insert_web_post(source=source, author=author, date=date, header=header, text=text, links=links)
     else:
         result = False
         print("")
