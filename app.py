@@ -3,20 +3,31 @@ from flask import Flask, request, jsonify
 import json
 
 app = Flask(__name__)
-db_filepath = "db.db"
+db_filepath = "project_api/Gos_project_fix.db"
 
 db_manager = DatabaseConnector(db_filepath)
 
-
 @app.route("/login", methods=['POST'])
 def login():
-    data = request.get_json(silent=True)
-    is_allowed = db_manager.login()
-    is_allowed = True
-    return jsonify({ "result": is_allowed })
+    try:
+        data = request.get_json()
+        if not data:
+            return jsonify({"success": False, "message": "No JSON data"}), 400
 
+        login = data.get("login")
+        password = data.get("password")
+        
+        if not login or not password:
+            return jsonify({"success": False, "message": "Missing login or password"}), 400
 
-
+        print(f"[DEBUG] Login attempt: {login}")  # Логируем ввод
+        is_allowed = db_manager.login(login, password)
+        
+        return jsonify({"success": is_allowed, "message": "OK" if is_allowed else "Invalid credentials"})
+    
+    except Exception as e:
+        print(f"[ERROR] Login failed: {e}")
+        return jsonify({"success": False, "message": "Server error"}), 500
 
 @app.route("/users/new", methods=['POST'])
 def add_user():
@@ -48,9 +59,6 @@ def add_user():
 
     return jsonify({ "result": result })
 
-
-
-
 @app.route("/add/tg", methods=['POST'])
 def add_tg():
     try:
@@ -73,9 +81,6 @@ def add_tg():
         print("")
 
     return jsonify({ "result": result })
-
-
-
 
 @app.route("/add/web", methods=['POST'])
 def add_web():

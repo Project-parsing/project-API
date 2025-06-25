@@ -1,16 +1,16 @@
-import argon2
+from argon2 import PasswordHasher
+from argon2.exceptions import VerifyMismatchError, InvalidHashError, VerificationError
 
 class ArgonHasher:
     def __init__(self):
-        self.hasher = argon2.PasswordHasher()
+        self.hasher = PasswordHasher()
 
     def hash(self, password: str) -> str:
-        hashed_password = self.hasher.hash(password)
-
-        return hashed_password
+        return self.hasher.hash(password.encode('utf-8'))
 
     def verify(self, hash: str, password: str) -> bool:
         try:
-            return self.hasher.verify(hash, password)
-        except argon2.exceptions.VerifyMismatchError:
+            return self.hasher.verify(hash, password.encode('utf-8'))
+        except (VerifyMismatchError, InvalidHashError, VerificationError) as e:
+            print(f"[ERROR] Argon2 verification failed: {str(e)}")
             return False
